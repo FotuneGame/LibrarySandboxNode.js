@@ -22,9 +22,11 @@
   "dependencies": {
     "@types/cors": "^2.8.17",
     "@types/express-fileupload": "^1.5.0",
+    "@types/redis": "^4.0.10",
     "cors": "^2.8.5",
     "cronosjs": "^1.7.1",
     "express": "^4.19.2",
-    "express-fileupload": "^1.5.1"
+    "express-fileupload": "^1.5.1",
+    "redis": "^4.7.0"
   }
 }
