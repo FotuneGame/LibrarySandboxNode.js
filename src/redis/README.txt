@@ -1,3 +1,5 @@
+//https://habr.com/ru/articles/821363/
+
 Для установки и настройик redis в ubuntu:
 
 0)wsl
@@ -34,3 +36,19 @@ sudo apt-get upgrade -y
 
 3)sudo service redis-server restart
 (если нет ошибок то ок)
+
+4) Опционально добавление пользователя с паролем
+
+   Замените (чтобы сохранять список пользователей в файле) #aclfile /path/to/users.acl на aclfile /path/to/users.acl
+
+   ... Затем надо ковырятся в редисе чтобы его запустить
+
+   Заходим в терминал управления redis: redis-cli -a пароль_пользователя_если_есть_по_умолчанию_его_нет
+
+   Создаём пользователя: ACL SETUSER new_user on ~* +@all
+   (new_user - имя, on - указывает на включение пользователя, ~* - разрешает доступ ко всем ключам, +@all - разрешает выполнение всех команд)
+
+    //your_pass === 8e498bfcf8aa1fa28a764b8eeb5546f44c0c24dba0c6587b112ced55f688a4f6
+   Добавляем зараенее хешированый пароль через RESETPASS #хеш: ACL SETUSER new_user on ~* +@all RESETPASS #8e498bfcf8aa1fa28a764b8eeb5546f44c0c24dba0c6587b112ced55f688a4f6
+
+
