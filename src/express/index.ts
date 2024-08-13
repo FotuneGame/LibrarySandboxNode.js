@@ -15,6 +15,9 @@ const port = process.env.PORT || 3000;
 const app:Express = express();
 const router:Router = express.Router();
 
+//Вложенность навигации
+const router_inside:Router = express.Router();
+router.use("/router_inside",router_inside);
 
 //добавление к навигации путей и способов обращения к ним
 router.get('/', (req:Request, res:Response, next:NextFunction) => {

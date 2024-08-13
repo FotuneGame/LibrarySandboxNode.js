@@ -27,6 +27,7 @@
     "cronosjs": "^1.7.1",
     "express": "^4.19.2",
     "express-fileupload": "^1.5.1",
+    "kafkajs": "^2.2.4",
     "redis": "^4.7.0"
   }
 }

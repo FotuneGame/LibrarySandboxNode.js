@@ -10,7 +10,7 @@ if(process.env.NODE_ENV==='production'){
         output: process.stdout,
     });
     
-    rl.question(`set library (1-cronos, 2-express, 3-redis, other-close)`, (set:number) => {
+    rl.question(`set library (1-cronos, 2-express, 3-redis, 4-kafka, other-close)`, (set:number) => {
         switch(Number(set)){
             case 1:
                 console.log("Cronos js:");
@@ -23,6 +23,10 @@ if(process.env.NODE_ENV==='production'){
             case 3:
                 console.log("Redis:");
                 require("./redis");
+                break;
+            case 4:
+                console.log("Kafka:");
+                require("./kafka");
                 break;
             default:
                 rl.close();
@@ -37,9 +41,12 @@ if (process.env.NODE_ENV==='development') {
     
     
     console.log("Express:");
-    require("./express");*/
+    require("./express");
 
     console.log("Redis:");
-    require("./redis");
+    require("./redis");*/
+
+    console.log("Kafka:");
+    require("./kafka");
 }
 
