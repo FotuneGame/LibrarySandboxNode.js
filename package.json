@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "docker": "ts-node ./src/docker/index.ts",
     "dev": "SET NODE_ENV=development&& nodemon src/index.ts ",
     "build": "tsc && SET NODE_ENV=production&& node dist/index.js",
     "start": "SET NODE_ENV=production&& ts-node ./src/index.ts"

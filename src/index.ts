@@ -10,7 +10,7 @@ if(process.env.NODE_ENV==='production'){
         output: process.stdout,
     });
     
-    rl.question(`set library (1-cronos, 2-express, 3-redis, 4-kafka, other-close)`, (set:number) => {
+    rl.question(`set library (1-cronos, 2-express, 3-redis, 4-kafka, 5-docker other-close)`, (set:number) => {
         switch(Number(set)){
             case 1:
                 console.log("Cronos js:");
@@ -28,6 +28,10 @@ if(process.env.NODE_ENV==='production'){
                 console.log("Kafka:");
                 require("./kafka");
                 break;
+            case 5:
+                console.log("Docker:");
+                require("./docker");
+                break;
             default:
                 rl.close();
         }
@@ -44,9 +48,12 @@ if (process.env.NODE_ENV==='development') {
     require("./express");
 
     console.log("Redis:");
-    require("./redis");*/
+    require("./redis");
 
     console.log("Kafka:");
     require("./kafka");
+    */
+    console.log("Docker:");
+    require("./docker");
 }
 
