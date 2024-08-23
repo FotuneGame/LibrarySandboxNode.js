@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Example Site</title>
+</head>
+<body>
+    <strong>Requests from client to server</strong>
+    <ul>
+        <li>
+            <a href="/">menu</a>
+        </li>
+        <li>
+            Fetch
+            <ol>
+                <li>
+                    <a href="/fetch/get">/fetch/get</a>
+                </li>
+                <li>
+                    <a href="/fetch/post">/fetch/post</a>
+                </li>
+            </ol>
+        </li>
+        <li>
+            XMLHttpRequest
+            <ol>
+                <li>
+                    <a href="/xhr/get">/xhr/get - XMLHttpRequest</a>
+                </li>
+                <li>
+                    <a href="/xhr/post">/xhr/post - XMLHttpRequest</a>
+                </li>
+            </ol>
+        </li>
+        <li>
+            Axios (SDN)
+            <ol>
+                <li>
+                    <a href="/axios/get">/axios/get</a>
+                </li>
+                <li>
+                    <a href="/axios/post">/axios/post</a>
+                </li>
+            </ol>
+        </li>
+        <li>
+            <a href="/websocket">Websocket</a>
+        </li>
+    </ul>
+
+    <p>For get-request with query; For post-request with cookie, body, headers</p> 
+    <p>info back: /api/get:id ; /api/post (headers:aceess_token; cookie:refresh_token; body:id)</p>
+</body>
+</html>

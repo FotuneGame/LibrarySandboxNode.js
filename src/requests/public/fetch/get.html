@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Example Site</title>
+</head>
+<body>
+    <a href="/">menu</a>
+    <strong>FETCH GET</strong>
+    <p id="message">Загружаю...</p>
+    <script>
+
+        const info = document.getElementById("message");
+
+        const load = async ()=>{
+            const response = await fetch("http://localhost:3006/api/get?" + new URLSearchParams({
+                id: '1'
+            }).toString());
+
+            return response.text();
+        }
+
+        load()
+        .then(res => info.innerText=res)
+        .catch(er=>console.log(er))
+
+    </script>
+</body>
+</html>

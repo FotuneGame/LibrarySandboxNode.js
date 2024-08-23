@@ -18,7 +18,7 @@ RUN npm install
 COPY . .
 
 #Настройка для вмонтирования ссылки на папку из тома
-VOLUME [ "/volume-name:/data" ]
+#VOLUME [ "/volume-name:/data" ]
 
 EXPOSE 3003
 

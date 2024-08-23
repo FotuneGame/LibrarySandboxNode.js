@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Example Site</title>
+</head>
+<body>
+    <a href="/">menu</a>
+    <strong>AXIOS GET</strong>
+    <p id="message">Загружаю...</p>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <script>
+        //import axios from "axios"; 
+
+        const info = document.getElementById("message");
+        const load = async() =>{ 
+            const res = await axios.get("http://localhost:3006/api/get",{
+                params:{
+                    id:5
+                }
+            })
+            if(res.status===200)
+                return JSON.stringify(res.data)
+            else
+                return Error("Status is "+res.status)
+        }
+
+        load().then(res =>info.innerText=res).catch(er=>info.innerText = er)
+    </script>
+</body>
+</html>

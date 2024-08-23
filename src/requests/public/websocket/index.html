@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Example Site</title>
+</head>
+<body>
+    <a href="/">menu</a>
+    <strong>Websocket</strong>
+    <p id="message">Загружаю...</p>
+    <script>
+
+        const info = document.getElementById("message");
+
+        //create websocket connection 
+        const socket = new WebSocket("http://localhost:8080");
+
+        //Connection opened
+        socket.addEventListener("open",(event)=>{
+            socket.send("Hello Server!!! This message from client...");
+        })
+
+        //listened messages
+        socket.addEventListener("message",(event)=>{
+            info.innerText = event.data;
+        })
+
+    </script>
+</body>
+</html>

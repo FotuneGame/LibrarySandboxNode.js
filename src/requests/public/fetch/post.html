@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Example Site</title>
+</head>
+<body>
+    <a href="/">menu</a>
+    <strong>FETCH POST</strong>
+    <p id="message">Загружаю...</p>
+    <script>
+
+        const info = document.getElementById("message");
+
+        const load = async ()=>{
+            const responsePost = await fetch("http://localhost:3006/api/post",{
+                method:"POST",
+                credentials: "include", // "same-origin" – стоит по умолчанию, не отправлять для запросов на другой источник,"include" – отправлять всегда, но при этом необходим заголовок Access-Control-Allow-Credentials в ответе от сервера, чтобы JavaScript получил доступ к ответу сервера, об этом говорилось в главе
+                headers:{
+                    'Content-Type': 'application/json;charset=utf-8',
+                    "access_token": "wow",
+                },
+                body:JSON.stringify({
+                    id: 2
+                })
+            });
+
+            return responsePost.text();
+        }
+
+        load()
+        .then(res => info.innerText=res)
+        .catch(er=>console.log(er))
+
+    </script>
+</body>
+</html>
