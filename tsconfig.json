@@ -6,7 +6,11 @@
     "moduleResolution": "Node",
     "strict": true,
     "esModuleInterop": true,                       
-    "forceConsistentCasingInFileNames": true,       
+    "forceConsistentCasingInFileNames": true,    
+    //Для sequalize-typescript  
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    
     "paths": {
       "@/*": ["./src/*"]
     }

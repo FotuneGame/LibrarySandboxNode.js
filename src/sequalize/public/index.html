@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Example sequalize</title>
+</head>
+<body>
+    <strong>Sequalize</strong>
+    <p>Default database have 4 teams. If you make a new user with team more than id=3, you will be break database, LOL)</p>
+    <ul>
+        <li>
+            <button onclick="getFrist()">получить ползователя под id=1</button>
+        </li>
+        <li>
+            <button onclick="getAll()">получить ползователей</button>
+        </li>
+        <li>
+            <input id="name_create" placeholder="Имя..."/>
+            <input id="password_create" placeholder="Фамилия"/>
+            <input id="teamId_create" placeholder="id комманды"/>
+            <button onclick="create()">Создать пользователя</button>
+        </li>
+        <li>
+            <input id="id_update" placeholder="Id"/>
+            <input id="name_update" placeholder="Имя..."/>
+            <input id="password_update" placeholder="Фамилия"/>
+            <input id="teamId_update" placeholder="id комманды"/>
+            <button onclick="update()">Обновить пользователя</button>
+        </li>
+        <li>
+            <input id="id_del" placeholder="Id"/>
+            <button onclick="del()">Удалить пользователя</button>
+        </li>
+        <li>
+            <input id="id_team" placeholder="Id"/>
+            <button onclick="team()">Получить user из team с id</button>
+        </li>
+        <li>
+            <input id="id_profile" placeholder="Id"/>
+            <button onclick="profile()">Получить по id user все profile</button>
+        </li>
+        <li>
+            <input id="id_user_add" placeholder="Id"/>
+            <input id="id_profile_add" placeholder="Id"/>
+            <button onclick="profile_add()">Привязать пользователя с профилем (всего 4 профиля генерируется в начале)</button>
+        </li>
+        <li>
+            <input id="id_user_del" placeholder="Id"/>
+            <input id="id_profile_del" placeholder="Id"/>
+            <button onclick="profile_del()">Привязать пользователя с профилем (всего 4 профиля генерируется в начале)</button>
+        </li>
+    </ul>
+    <p id="message">НАЖМИ НА КНОПУ И НЕ ЗАБУДЬ ВКЛЮЧИТЬ POSTGREE pgAdmin4</p>
+</body>
+<script> 
+    const info = document.getElementById("message");
+
+
+    const getByIdUser = async (id)=>{
+        const response = await fetch("http://localhost:3007/api/user/"+id);
+        return response.text();
+    }
+
+    const getAllUser = async ()=>{
+        const response = await fetch("http://localhost:3007/api/users");
+        return response.text();
+    }
+
+    const createUser = async (name, password, teamId)=>{
+        const response = await fetch("http://localhost:3007/api/user/create",{
+                method:"POST",
+                credentials: "include", // "same-origin" – стоит по умолчанию, не отправлять для запросов на другой источник,"include" – отправлять всегда, но при этом необходим заголовок Access-Control-Allow-Credentials в ответе от сервера, чтобы JavaScript получил доступ к ответу сервера, об этом говорилось в главе
+                headers:{
+                    'Content-Type': 'application/json;charset=utf-8',
+                    "access_token": "wow",
+                },
+                body:JSON.stringify({
+                    name: name,
+                    password: password,
+                    teamId: teamId
+                })
+            });
+        return response.text();
+    }
+
+    const updateUser = async (id, name, password, teamId)=>{
+        console.log(id,name, password)
+        const response = await fetch("http://localhost:3007/api/user/update",{
+                method:"PUT",
+                credentials: "include", // "same-origin" – стоит по умолчанию, не отправлять для запросов на другой источник,"include" – отправлять всегда, но при этом необходим заголовок Access-Control-Allow-Credentials в ответе от сервера, чтобы JavaScript получил доступ к ответу сервера, об этом говорилось в главе
+                headers:{
+                    'Content-Type': 'application/json;charset=utf-8',
+                    "access_token": "wow",
+                },
+                body:JSON.stringify({
+                    id: id,
+                    name: name,
+                    password: password,
+                    teamId: teamId
+                })
+            });
+        return response.text();
+    }
+
+    const delUser = async (id)=>{
+        const response = await fetch("http://localhost:3007/api/user/delete",{
+                method:"DELETE",
+                credentials: "include", // "same-origin" – стоит по умолчанию, не отправлять для запросов на другой источник,"include" – отправлять всегда, но при этом необходим заголовок Access-Control-Allow-Credentials в ответе от сервера, чтобы JavaScript получил доступ к ответу сервера, об этом говорилось в главе
+                headers:{
+                    'Content-Type': 'application/json;charset=utf-8',
+                    "access_token": "wow",
+                },
+                body:JSON.stringify({
+                    id: id
+                })
+            });
+        return response.text();
+    }
+
+    const generateTeam = async ()=>{
+        const response = await fetch("http://localhost:3007/api/team/generate");
+        return response.text();
+    }
+    
+
+    const getUsersByTeamWithId = async (id)=>{
+        const response = await fetch("http://localhost:3007/api/team/users/"+id);
+        return response.text();
+    }
+
+    const generateProfile = async ()=>{
+        const response = await fetch("http://localhost:3007/api/profile/generate");
+        return response.text();
+    }
+
+    const getUserAllProfiles = async (id)=>{
+        const response = await fetch("http://localhost:3007/api/profile/user/"+id);
+        return response.text();
+    }
+
+
+    const createProfileUser = async (userId,profileId)=>{
+        const response = await fetch("http://localhost:3007/api/profile/add",{
+                method:"POST",
+                credentials: "include", // "same-origin" – стоит по умолчанию, не отправлять для запросов на другой источник,"include" – отправлять всегда, но при этом необходим заголовок Access-Control-Allow-Credentials в ответе от сервера, чтобы JavaScript получил доступ к ответу сервера, об этом говорилось в главе
+                headers:{
+                    'Content-Type': 'application/json;charset=utf-8',
+                    "access_token": "wow",
+                },
+                body:JSON.stringify({
+                    userId: userId,
+                    profileId: profileId
+                })
+            });
+        return response.text();
+    }
+
+    const delProfileUser = async (userId,profileId)=>{
+        const response = await fetch("http://localhost:3007/api/profile/delete",{
+                method:"DELETE",
+                credentials: "include", // "same-origin" – стоит по умолчанию, не отправлять для запросов на другой источник,"include" – отправлять всегда, но при этом необходим заголовок Access-Control-Allow-Credentials в ответе от сервера, чтобы JavaScript получил доступ к ответу сервера, об этом говорилось в главе
+                headers:{
+                    'Content-Type': 'application/json;charset=utf-8',
+                    "access_token": "wow",
+                },
+                body:JSON.stringify({
+                    userId: userId,
+                    profileId: profileId
+                })
+            });
+        return response.text();
+    }
+
+
+
+
+
+    function getFrist(){
+        getByIdUser(1).then(res => info.innerText=res).catch(res => info.innerText="Нет такого пользователя")
+    }
+
+    function getAll(){
+        getAllUser().then(res => info.innerText=res).catch(res => info.innerText="Пустой список")
+    }
+
+    function create(){
+        const name = document.getElementById("name_create").value;
+        const password = document.getElementById("password_create").value;
+        const teamId = document.getElementById("teamId_create").value;
+        createUser(name,password,teamId).then(res => info.innerText=res).catch(res => info.innerText="Не создан")
+    }
+    function update(){
+        const id = document.getElementById("id_update").value;
+        const name = document.getElementById("name_update").value;
+        const password = document.getElementById("password_update").value;
+        const teamId = document.getElementById("teamId_update").value;
+        updateUser(id,name,password,teamId).then(res => info.innerText=res).catch(res => info.innerText="Не обновлен")
+    }
+
+    function del(){
+        const id = document.getElementById("id_del").value;
+        delUser(id).then(res => info.innerText=res).catch(res => info.innerText="Не удалён")
+    }
+
+    function team(){
+        const id = document.getElementById("id_team").value;
+        getUsersByTeamWithId(id).then(res => info.innerText=res).catch(res => info.innerText="нет игроков у команды")
+    }
+
+    function profile(){
+        const id = document.getElementById("id_profile").value;
+        getUserAllProfiles(id).then(res => info.innerText=res).catch(res => info.innerText="нет профилей у user")
+    }
+
+    function profile_add(){
+        const userId = document.getElementById("id_user_add").value;
+        const profileId = document.getElementById("id_profile_add").value;
+        createProfileUser(userId,profileId).then(res => info.innerText=res).catch(res => info.innerText="Профиль не создан для user")
+    }
+
+    function profile_del(){
+        const userId = document.getElementById("id_user_del").value;
+        const profileId = document.getElementById("id_profile_del").value;
+        delProfileUser(userId,profileId).then(res => info.innerText=res).catch(res => info.innerText="Профиль не удален для user")
+    }
+
+
+    generateTeam().then(res => console.log(res)).catch(res => console.log("Ошибка генерации команд"))
+    generateProfile().then(res => console.log(res)).catch(res => console.log("Ошибка генерации профилей"))
+</script>
+</html>

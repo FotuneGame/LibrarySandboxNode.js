@@ -10,7 +10,7 @@ if(process.env.NODE_ENV==='production'){
         output: process.stdout,
     });
     
-    rl.question(`set library (1-cronos, 2-express, 3-redis, 4-kafka, 5-docker, 6-requests other-close)`, (set:number) => {
+    rl.question(`set library (1-cronos, 2-express, 3-redis, 4-kafka, 5-docker, 6-requests, 7-sequalize other-close)`, (set:number) => {
         switch(Number(set)){
             case 1:
                 console.log("Cronos js:");
@@ -36,6 +36,10 @@ if(process.env.NODE_ENV==='production'){
                 console.log("Requsets:");
                 require("./requests");
                 break;
+            case 7:
+                console.log("Sequalize:");
+                require("./sequalize");
+                break;
             default:
                 rl.close();
         }
@@ -59,9 +63,12 @@ if (process.env.NODE_ENV==='development') {
 
     console.log("Docker:");
     require("./docker");
-    */
 
     console.log("Requsets:");
     require("./requests");
+    */
+
+    console.log("Sequalize:");
+    require("./sequalize");
 }
 
